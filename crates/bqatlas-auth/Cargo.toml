@@ -1,0 +1,34 @@
+[package]
+name = "bqatlas-auth"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+openidconnect = { version = "4.0.1", default-features = false, features = ["reqwest", "rustls-tls"] }
+reqwest.workspace = true
+serde_urlencoded = "0.7"
+
+axum.workspace = true
+argon2.workspace = true
+async-trait.workspace = true
+chrono.workspace = true
+rand.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+subtle.workspace = true
+tokio.workspace = true
+tower-sessions.workspace = true
+time.workspace = true
+uuid.workspace = true
+tracing.workspace = true
+bqatlas-core = { path = "../bqatlas-core" }
+bqatlas-contracts = { path = "../bqatlas-contracts" }
+bqatlas-db = { path = "../bqatlas-db" }
+bqatlas-http = { path = "../bqatlas-http" }
+
+[lints]
+workspace = true

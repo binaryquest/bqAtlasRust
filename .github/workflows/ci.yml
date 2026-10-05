@@ -1,0 +1,68 @@
+name: Rust and Atlas qualification
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@1.90.0
+        with:
+          components: rustfmt, clippy
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.15.0'
+          cache: npm
+          cache-dependency-path: samples/crm/web/package-lock.json
+      - run: cargo fmt --all --check
+      - run: cargo clippy --locked --workspace --all-targets -- -D warnings
+      - run: cargo test --locked --workspace
+      - run: cargo check --locked -p bqatlas-db --no-default-features --features postgresql
+      - run: cargo check --locked -p bqatlas-db --no-default-features --features sqlserver
+      - run: node dev/verify-frontend.mjs
+      - run: npm --prefix samples/crm/web ci
+      - run: npm --prefix samples/crm/web run build
+      - run: docker build -t bqatlas-rust:qualification .
+      - run: docker compose -f dev/compose.yaml up -d postgres
+      - run: bash dev/wait-services.sh postgresql
+      - run: bash dev/test-image.sh bqatlas-rust:qualification
+      - if: always()
+        run: docker compose -f dev/compose.yaml down -v
+  database:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        provider: [postgresql, sqlserver]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@1.90.0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.15.0'
+          package-manager-cache: false
+      - name: Configure isolated database
+        shell: bash
+        run: |
+          if [[ '${{ matrix.provider }}' == 'postgresql' ]]; then
+            docker compose -f dev/compose.yaml --profile oidc up -d postgres keycloak
+            echo 'BQATLAS_TEST_DATABASE_URL=postgres://bqatlas:bqatlas-rust-dev-only@127.0.0.1:25433/bqatlas_rust_dev' >> "$GITHUB_ENV"
+            echo 'BQATLAS_TEST_OIDC_ISSUER=http://127.0.0.1:28182/realms/bqatlas-rust' >> "$GITHUB_ENV"
+          else
+            docker compose -f dev/compose.yaml --profile sqlserver up -d sqlserver
+            echo 'BQATLAS_TEST_DATABASE_URL=Server=tcp:127.0.0.1,21434;Database=master;User Id=sa;Password=RustAtlas-Db!2026;TrustServerCertificate=true' >> "$GITHUB_ENV"
+          fi
+          echo 'BQATLAS_TEST_PROVIDER=${{ matrix.provider }}' >> "$GITHUB_ENV"
+      - run: bash dev/wait-services.sh '${{ matrix.provider }}'
+      - run: cargo test --locked -p bqatlas-server --test runtime -- --ignored
+      - run: bash dev/test-starter.sh
+      - if: always()
+        run: docker compose -f dev/compose.yaml --profile oidc --profile sqlserver down -v

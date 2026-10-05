@@ -1,0 +1,18 @@
+{
+  "sourceRepository": "https://github.com/binaryquest/bqAtlas",
+  "sourceRevision": "f1d0d3ee1e7cbf044c5b2bf0e21ae89859b07757",
+  "artifacts": [
+    {
+      "file": "bqatlas-contracts-0.1.0-alpha.1.tgz",
+      "sha256": "67f6bcff8fbd9ccdc6a9b6e7f0a64636b243e39ce90a1775c28d1bcbb1722d9f"
+    },
+    {
+      "file": "bqatlas-ui-0.1.0-alpha.1.tgz",
+      "sha256": "7385971813021349e6a6c84b21db830c7c1146bdfc5a04813b4dc2ea99b154cf"
+    },
+    {
+      "file": "bqatlas-angular-0.1.0-alpha.1.tgz",
+      "sha256": "7a9e7d5924907c70e13f409b8d4f4070e11c82776860ead22f306d46a9b86893"
+    }
+  ]
+}

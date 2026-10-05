@@ -1,0 +1,22 @@
+{
+  "/api/**": {
+    "target": "http://127.0.0.1:5201",
+    "secure": false
+  },
+  "/auth/**": {
+    "target": "http://127.0.0.1:5201",
+    "secure": false
+  },
+  "/odata/**": {
+    "target": "http://127.0.0.1:5201",
+    "secure": false
+  },
+  "/signin-oidc": {
+    "target": "http://127.0.0.1:5201",
+    "secure": false
+  },
+  "/signout-callback-oidc": {
+    "target": "http://127.0.0.1:5201",
+    "secure": false
+  }
+}

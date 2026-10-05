@@ -1,0 +1,11 @@
+target
+.git
+.env
+.env.*
+!.env.example
+.local-mail
+node_modules
+**/node_modules
+**/dist
+**/.angular
+artifacts

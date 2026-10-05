@@ -1,0 +1,18 @@
+[package]
+name = "bqatlas-sample-crm-contracts"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+async-trait.workspace = true
+chrono.workspace = true
+uuid.workspace = true
+bqatlas-core = { path = "../../../../crates/bqatlas-core" }
+bqatlas-contracts = { path = "../../../../crates/bqatlas-contracts" }
+
+[lints]
+workspace = true

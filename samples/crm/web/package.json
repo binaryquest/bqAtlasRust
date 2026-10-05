@@ -1,0 +1,32 @@
+{
+  "name": "bqatlas-rust-crm-demo",
+  "version": "0.1.0-alpha.1",
+  "private": true,
+  "scripts": {
+    "start": "ng serve crm --host 127.0.0.1 --port 4300",
+    "build": "ng build crm",
+    "check": "tsc --noEmit -p tsconfig.app.json"
+  },
+  "dependencies": {
+    "@angular/common": "22.1.7",
+    "@angular/compiler": "22.1.7",
+    "@angular/core": "22.1.7",
+    "@angular/forms": "22.1.7",
+    "@angular/platform-browser": "22.1.7",
+    "rxjs": "7.8.2",
+    "tslib": "2.8.1",
+    "pdfjs-dist": "^6.3.289",
+    "@bqatlas/contracts": "file:vendor/bqatlas-contracts-0.1.0-alpha.1.tgz",
+    "@bqatlas/ui": "file:vendor/bqatlas-ui-0.1.0-alpha.1.tgz",
+    "@bqatlas/angular": "file:vendor/bqatlas-angular-0.1.0-alpha.1.tgz"
+  },
+  "devDependencies": {
+    "@angular/build": "22.1.8",
+    "@angular/cli": "22.1.8",
+    "@angular/compiler-cli": "22.1.7",
+    "typescript": "~6.0.0"
+  },
+  "engines": {
+    "node": ">=24.15.0"
+  }
+}

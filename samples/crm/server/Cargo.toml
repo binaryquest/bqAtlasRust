@@ -1,0 +1,42 @@
+[package]
+name = "bqatlas-server"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+dotenvy = "0.15.7"
+time.workspace = true
+tower-sessions.workspace = true
+
+axum.workspace = true
+tokio.workspace = true
+tower.workspace = true
+tower-http.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+clap.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+chrono.workspace = true
+uuid.workspace = true
+reqwest.workspace = true
+http-body-util.workspace = true
+futures-util = "0.3"
+bqatlas-core = { path = "../../../crates/bqatlas-core" }
+bqatlas-contracts = { path = "../../../crates/bqatlas-contracts" }
+bqatlas-db = { path = "../../../crates/bqatlas-db" }
+bqatlas-http = { path = "../../../crates/bqatlas-http" }
+bqatlas-auth = { path = "../../../crates/bqatlas-auth" }
+bqatlas-sample-crm = { path = "../modules/crm" }
+
+bqatlas-sample-sales = { path = "../modules/sales" }
+bqatlas-sample-engagement = { path = "../modules/engagement" }
+
+[lints]
+workspace = true
+
+
+[dev-dependencies]
+async-trait.workspace = true

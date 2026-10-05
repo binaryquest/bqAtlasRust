@@ -1,0 +1,408 @@
+@import "@bqatlas/ui/theme.css";
+@import "@bqatlas/angular/styles.css";
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font:
+    14px/1.5 Inter,
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+  color: #1e293b;
+  background: #f1f5f9;
+}
+app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+button,
+input {
+  font: inherit;
+}
+.brand {
+  font-size: 24px;
+  font-weight: 750;
+  letter-spacing: -1px;
+  text-decoration: none;
+  color: inherit;
+}
+.brand span {
+  font-weight: 400;
+}
+.bqatlas-spacer {
+  flex: 1;
+}
+atlas-workspace {
+  flex: 1;
+  min-height: 0;
+}
+.workspace-home {
+  padding: 64px 6%;
+  max-width: 1100px;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #526178;
+}
+h1 {
+  font-size: 38px;
+  line-height: 1.12;
+  letter-spacing: -1.4px;
+  font-weight: 600;
+  margin: 16px 0;
+}
+.intro {
+  color: #526178;
+  font-size: 15px;
+}
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 330px));
+  gap: 18px;
+  margin-top: 40px;
+}
+.module-card {
+  background: #fff;
+  border: 1px solid #dce3ec;
+  border-radius: 10px;
+  padding: 26px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px #1e293b05;
+}
+.module-card:hover {
+  border-color: #426b9f;
+  box-shadow: 0 6px 24px #1e293b0c;
+}
+.module-card strong {
+  font-size: 20px;
+}
+.module-card > span:last-child {
+  font-size: 12px;
+  color: #64748b;
+}
+.module-mark {
+  background: #edf3fc;
+  color: #3669a5;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1px;
+  border-radius: 6px;
+  align-self: flex-start;
+  padding: 8px 10px;
+}
+.workspace-note {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 48px;
+  color: #526178;
+  font-size: 11px;
+}
+.status-dot {
+  height: 6px;
+  width: 6px;
+  background: #3c9178;
+  border-radius: 50%;
+}
+.login-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100%;
+}
+.login-story {
+  background: #142938;
+  color: #f2f7fa;
+  padding: 48px 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.login-story h1 {
+  font-size: 56px;
+  line-height: 1.05;
+}
+.login-story .eyebrow,
+.login-story small {
+  color: #8eabb9;
+}
+.login-story p:not(.eyebrow) {
+  max-width: 300px;
+  color: #abc0cb;
+}
+.login-panel {
+  display: grid;
+  place-items: center;
+  background: #fbfcfd;
+  padding: 32px;
+}
+.login-form {
+  width: 100%;
+  max-width: 340px;
+}
+.login-form h2 {
+  font-size: 24px;
+  letter-spacing: -0.6px;
+  line-height: 1.3;
+  margin: 12px 0 32px;
+}
+.login-form form {
+  display: grid;
+  gap: 10px;
+}
+.login-form label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+.login-form input {
+  height: 40px;
+}
+.login-form button {
+  margin-top: 20px;
+  min-height: 40px;
+}
+.login-form .atlas-alert {
+  margin-top: 20px;
+}
+.oidc-link {
+  color: #2c5e90;
+}
+.startup {
+  margin: auto;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .login-layout {
+    grid-template-columns: 1fr;
+  }
+  .login-story {
+    display: none;
+  }
+  .workspace-home {
+    padding: 32px 20px;
+  }
+  h1 {
+    font-size: 30px;
+  }
+  .bqatlas-field {
+    grid-template-columns: 1fr;
+  }
+  .bqatlas-field-error {
+    grid-column: 1;
+  }
+}
+
+.quote-view .bqatlas-toolbar > strong {
+  max-width: 35%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+.quote-status {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: #edf2f7;
+  color: #566678;
+}
+.quote-status.submitted {
+  background: #e5f4ed;
+  color: #21724c;
+}
+.quote-form {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+}
+.quote-form fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.quote-header-fields {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 160px 100px;
+  gap: 20px;
+}
+.quote-header-fields > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.quote-header-fields label {
+  font-size: 12px;
+  font-weight: 600;
+}
+.quote-header-fields select {
+  height: 32px;
+  border: 1px solid #d7dde6;
+  border-radius: 4px;
+  background: white;
+  padding: 4px 8px;
+}
+.quote-lines-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 12px;
+}
+.quote-lines-heading > span:not(.bqatlas-spacer) {
+  font-size: 11px;
+  color: #64748b;
+}
+.quote-sheet-scroll {
+  overflow: auto;
+  border: 1px solid #dfe5ed;
+  border-radius: 5px;
+}
+.quote-sheet {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+.quote-sheet th {
+  padding: 9px 10px;
+  background: #f5f7fa;
+  text-align: left;
+  font-size: 11px;
+  color: #64748b;
+}
+.quote-sheet td {
+  padding: 6px 8px;
+  border-top: 1px solid #e7ebf1;
+  vertical-align: top;
+}
+.quote-sheet td:first-child {
+  width: 40%;
+}
+.quote-sheet td:nth-child(2),
+.quote-sheet td:nth-child(3) {
+  width: 20%;
+}
+.quote-sheet .atlas-input {
+  width: 100%;
+}
+.quote-sheet small {
+  display: block;
+  max-width: 220px;
+  margin-top: 4px;
+}
+.quote-amount {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+  line-height: 32px;
+}
+.quote-remove {
+  border: 0;
+  background: transparent;
+  color: #a33535;
+  font-size: 22px;
+  cursor: pointer;
+}
+.quote-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 24px;
+  border-top: 1px solid #dfe5ed;
+  background: #fbfcfe;
+}
+.quote-footer > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.quote-footer strong {
+  font-size: 12px;
+}
+.quote-footer small {
+  font-size: 11px;
+  color: #64748b;
+}
+.quote-total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-variant-numeric: tabular-nums;
+}
+.quote-total span {
+  color: #64748b;
+  font-size: 11px;
+}
+.quote-total strong {
+  font-size: 24px;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+@media (max-width: 700px) {
+  .quote-header-fields {
+    grid-template-columns: 1fr 1fr;
+  }
+  .quote-customer {
+    grid-column: 1/-1;
+  }
+  .quote-footer {
+    align-items: flex-start;
+  }
+  .quote-lines-heading > span:not(.bqatlas-spacer) {
+    display: none;
+  }
+  .quote-total strong {
+    font-size: 18px;
+  }
+}
+
+.user-account-dialog .atlas-dialog { width: min(560px, calc(100vw - 32px)); }
+.user-account-profile { display: flex; gap: 12px; align-items: center; padding-bottom: 20px; border-bottom: 1px solid var(--atlas-border); }
+.user-account-profile strong { overflow-wrap: anywhere; }
+.user-account-profile p { margin: 2px 0 0; font-size: 12px; color: var(--atlas-muted); }
+.user-account-dialog .bqatlas-view { height: auto; }
+.user-account-dialog fieldset { display: grid; gap: 12px; min-width: 0; border: 0; padding: 0; }
+.user-account-dialog fieldset label { display: grid; gap: 6px; }
+
+/* Align the showcase launcher with nested application menu cards. */
+.workspace-home .showcase-launcher {
+  display: flex;
+  justify-content: flex-start;
+  width: calc(100% - 16px);
+  min-height: 54px;
+  margin: 24px 0 0 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--atlas-border, #d5dbe5);
+  border-radius: 10px;
+  background: var(--atlas-surface, #fff);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  white-space: normal;
+}
+.workspace-home .showcase-launcher:hover {
+  background: var(--atlas-surface-hover, #f5f7fa);
+  border-color: var(--atlas-accent);
+}
+
+.quote-product-picker{display:grid;gap:8px;margin:18px 0 24px;padding:16px;background:#f7f8fc;border:1px solid #e6e9f2;border-radius:9px}.quote-product-picker small{color:#64748b;font-size:12px}.quote-product-picker label{font-weight:600}
+
+.workspace-learning{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:24px 0 0 16px}.workspace-learning .showcase-launcher{margin:0;width:100%}

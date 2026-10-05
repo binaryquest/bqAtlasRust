@@ -1,0 +1,24 @@
+[package]
+name = "bqatlas-sample-sales"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+bqatlas-odata = { path = "../../../../crates/bqatlas-odata" }
+serde.workspace = true
+serde_json.workspace = true
+async-trait.workspace = true
+chrono.workspace = true
+uuid.workspace = true
+axum.workspace = true
+rust_decimal.workspace = true
+bqatlas-core = { path = "../../../../crates/bqatlas-core" }
+bqatlas-contracts = { path = "../../../../crates/bqatlas-contracts" }
+bqatlas-db = { path = "../../../../crates/bqatlas-db" }
+bqatlas-http = { path = "../../../../crates/bqatlas-http" }
+bqatlas-sample-crm-contracts = { path = "../crm-contracts" }
+
+[lints]
+workspace = true

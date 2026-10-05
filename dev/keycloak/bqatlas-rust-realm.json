@@ -1,0 +1,107 @@
+{
+  "realm": "bqatlas-rust",
+  "enabled": true,
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "roles": {
+    "realm": [
+      {
+        "name": "atlas-demo-admin"
+      },
+      {
+        "name": "atlas-demo-reader"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "bqatlas-rust",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "rust-oidc-dev-only",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "http://127.0.0.1:4300/signin-oidc",
+        "http://127.0.0.1:5201/signin-oidc",
+        "http://127.0.0.1:5202/signin-oidc",
+        "http://127.0.0.1:4300/signout-callback-oidc",
+        "http://127.0.0.1:5201/signout-callback-oidc",
+        "http://127.0.0.1:5202/signout-callback-oidc"
+      ],
+      "attributes": {
+        "post.logout.redirect.uris": "+",
+        "pkce.code.challenge.method": "S256"
+      },
+      "protocolMappers": [
+        {
+          "name": "Atlas realm roles",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "config": {
+            "claim.name": "realm_access.roles",
+            "jsonType.label": "String",
+            "multivalued": "true",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "admin",
+      "email": "admin@example.test",
+      "emailVerified": true,
+      "enabled": true,
+      "firstName": "admin",
+      "lastName": "Demo",
+      "realmRoles": [
+        "atlas-demo-admin"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "RustOidc-Dev!2026",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "reader",
+      "email": "reader@example.test",
+      "emailVerified": true,
+      "enabled": true,
+      "firstName": "reader",
+      "lastName": "Demo",
+      "realmRoles": [
+        "atlas-demo-reader"
+      ],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "RustOidc-Dev!2026",
+          "temporary": false
+        }
+      ]
+    },
+    {
+      "username": "unassigned",
+      "email": "unassigned@example.test",
+      "emailVerified": true,
+      "enabled": true,
+      "firstName": "unassigned",
+      "lastName": "Demo",
+      "realmRoles": [],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "RustOidc-Dev!2026",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}

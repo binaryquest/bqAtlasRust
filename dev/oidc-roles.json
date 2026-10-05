@@ -1,0 +1,29 @@
+{
+  "atlas-demo-admin": [
+    "crm.customers.read",
+    "crm.customers.write",
+    "crm.customers.delete",
+    "crm.customers.lookup",
+    "sales.quotes.read",
+    "sales.quotes.write",
+    "sales.quotes.delete",
+    "sales.quotes.submit",
+    "engagement.products.read",
+    "engagement.products.write",
+    "engagement.products.delete",
+    "engagement.opportunities.read",
+    "engagement.opportunities.write",
+    "engagement.opportunities.delete",
+    "engagement.activities.read",
+    "engagement.activities.write",
+    "engagement.activities.delete"
+  ],
+  "atlas-demo-reader": [
+    "crm.customers.read",
+    "crm.customers.lookup",
+    "sales.quotes.read",
+    "engagement.products.read",
+    "engagement.opportunities.read",
+    "engagement.activities.read"
+  ]
+}

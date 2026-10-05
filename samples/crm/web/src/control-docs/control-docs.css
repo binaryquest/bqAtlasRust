@@ -1,0 +1,229 @@
+:host {
+  display: block;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+.control-docs {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  color: #252a40;
+}
+.docs-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 28px;
+  border-bottom: 1px solid #e5e8f0;
+  background: #f9faff;
+}
+.docs-heading p {
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  color: #7061c8;
+  margin: 0 0 8px;
+}
+.docs-heading h2 {
+  font-size: 25px;
+  letter-spacing: -0.8px;
+  margin: 0 0 8px;
+}
+.docs-heading span {
+  font-size: 12px;
+  color: #67728a;
+}
+.docs-layout {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  flex: 1;
+  min-height: 0;
+}
+.docs-nav {
+  overflow: auto;
+  border-right: 1px solid #e5e8f0;
+  padding: 20px 14px;
+  background: #fcfcfe;
+}
+.docs-nav input {
+  width: 100%;
+  margin-bottom: 12px;
+}
+.docs-nav h3 {
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  color: #8390a3;
+  margin: 24px 10px 8px;
+}
+.docs-nav button {
+  display: block;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 12px;
+  width: 100%;
+  color: #48536a;
+  font-size: 12px;
+  cursor: pointer;
+}
+.docs-nav button:hover {
+  background: #f0eef9;
+}
+.docs-nav button.selected {
+  background: #ece8ff;
+  color: #6249cd;
+  font-weight: 600;
+}
+.docs-nav button:focus-visible {
+  outline: 2px solid #7862d2;
+}
+.docs-article {
+  padding: 28px 34px 50px;
+  overflow: auto;
+  min-width: 0;
+}
+.docs-breadcrumb {
+  font-size: 11px;
+  color: #7d879e;
+  margin-top: 0;
+}
+.docs-article h1 {
+  font-size: 29px;
+  letter-spacing: -0.9px;
+  margin: 14px 0;
+}
+.docs-description {
+  font-size: 14px;
+  color: #617089;
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+.docs-preview {
+  border: 1px solid #dedfea;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.docs-section-label {
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  padding: 12px 18px;
+  background: #f7f8fc;
+  border-bottom: 1px solid #e7e9f0;
+  color: #718097;
+  display: flex;
+  justify-content: space-between;
+}
+.docs-section-label span {
+  text-transform: none;
+  letter-spacing: 0;
+  color: #7c6ac7;
+}
+.docs-demo {
+  padding: 24px;
+  min-height: 110px;
+}
+.docs-demo > button {
+  margin-right: 8px;
+}
+.docs-demo > label {
+  display: block;
+  margin-bottom: 8px;
+}
+.docs-demo > p {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 14px;
+}
+.docs-article h2 {
+  font-size: 17px;
+  margin: 30px 0 12px;
+}
+.docs-article h3 {
+  font-size: 12px;
+  margin: 20px 0 8px;
+}
+.docs-article pre {
+  border: 1px solid #e5e8f0;
+  border-radius: 8px;
+  background: #f7f8fb;
+  padding: 16px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.docs-article p,
+.docs-note {
+  line-height: 1.75;
+}
+.docs-note {
+  font-size: 12px;
+  color: #68748a;
+}
+.control-docs {
+  container-type: inline-size;
+}
+@container (max-width:650px) {
+  .docs-heading {
+    padding: 18px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .docs-layout {
+    grid-template-columns: 1fr;
+    overflow: auto;
+  }
+  .docs-nav {
+    max-height: 210px;
+    border-bottom: 1px solid #e5e8f0;
+    border-right: 0;
+    overflow: auto;
+  }
+  .docs-nav button {
+    display: inline-block;
+    width: auto;
+  }
+  .docs-nav h3 {
+    display: inline-block;
+    margin: 10px;
+  }
+  .docs-article {
+    padding: 22px 18px;
+    overflow: visible;
+  }
+  .docs-demo {
+    padding: 16px;
+  }
+}
+
+.docs-mobile-picker {
+  display: none;
+}
+@container (max-width:650px) {
+  .docs-mobile-picker {
+    display: grid;
+    gap: 8px;
+    padding: 14px 18px;
+    font-size: 12px;
+    border-bottom: 1px solid #e5e8f0;
+  }
+  .docs-mobile-picker select {
+    width: 100%;
+  }
+  .docs-nav {
+    display: none;
+  }
+  .docs-layout {
+    display: block;
+    overflow: auto;
+  }
+  .docs-article {
+    overflow: visible;
+  }
+}

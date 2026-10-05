@@ -1,0 +1,12 @@
+/target/
+/artifacts/
+.env
+.env.*
+!.env.example
+.local-mail/
+node_modules/
+.DS_Store
+
+samples/crm/web/dist/
+samples/crm/web/out-tsc/
+samples/crm/web/.angular/

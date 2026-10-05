@@ -1,0 +1,4 @@
+# Source provenance
+The Angular UI in frontend/projects/ui originates from the local Atlas UI project at Documents/ChatGPT/extjs (25 September 2026 snapshot). The original workspace is retained. bqStart supplied architecture concepts; its application and credentials are not copied. The project, including this reused Atlas source, is released under the root MIT LICENSE as directed by the project owner. Registry namespace ownership remains to be configured before package publication. Third-party dependencies retain their own licenses.
+
+The interactive showcase examples under frontend/projects/erp/src/showcase adapt the original Atlas playground purchase-order, selection, lookup, collection and business-panel examples (26 September 2026). Their imports and host presentation are updated for bqAtlas; the original workspace remains intact.
