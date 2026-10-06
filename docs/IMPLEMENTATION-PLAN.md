@@ -1,12 +1,12 @@
-# bqAtlas Rust implementation plan
+# Original Rust implementation plan
 
-Prepared 30 September 2026. This is the original architecture/sequence, followed by implementation. The current alpha now includes the workspace, both database adapters, complete CRM REST flows, local recovery/session security, OIDC, bounded OData, a portable starter and directory scaffolding. See README and TESTING for actual scope and evidence. General field-driven generation, optional bearer access, broader OData/OpenAPI tooling and hosted release qualification are still future work.
+Prepared 30 September 2026 before implementation. This document preserves the original design and delivery sequence. Proposed structures, dependencies and release gates below are historical context, not claims of implemented behavior. For current files and decisions, read [ARCHITECTURE.md](ARCHITECTURE.md); for delivered/deferred scope, read [HANDOFF.md](HANDOFF.md); for actual evidence, read [TESTING.md](TESTING.md).
 
 Build a Rust backend that can run the existing Atlas CRM demo and support new ERP modules. Preserve the public HTTP behavior that the Angular application depends on, while replacing ASP.NET Core infrastructure with Rust implementations. Keep the existing bqAtlas repository as the source of shared frontend packages and the reference for compatibility.
 
 ## Scope and release boundary
 
-The target repository is `/Users/sazzadhossain/Projects/GitHub/bqAtlasRust`. It now contains the source alpha implementation. The product remains MIT licensed, with a reusable framework, full-stack starter and CRUD scaffolding. Rust backend libraries will be Cargo crates; Angular libraries retain their existing npm package identities. Public registry publication remains deferred.
+The target repository is `binaryquest/bqAtlasRust`. It contains the independent Rust source alpha. The product remains MIT licensed, with a reusable framework, full-stack starter and CRUD scaffolding. Rust backend libraries will be Cargo crates; Angular libraries retain their existing npm package identities. Public registry publication remains deferred.
 
 The first Rust release targets one organization per deployment, one backend process and one database provider per deployment. Both PostgreSQL and SQL Server must pass release tests. The first working slice can use PostgreSQL, but SQL Server feasibility is checked before framework APIs are committed.
 
@@ -58,7 +58,7 @@ The other building blocks are documented in [Axum](https://docs.rs/axum/latest/a
 
 ## Workspace and module design
 
-Proposed layout, created during implementation:
+Layout considered during planning. The implemented source map is in [ARCHITECTURE.md](ARCHITECTURE.md); top-level `templates/` and `tests/` directories were not created, and API bearer support remains deferred:
 
 ```text
 bqAtlasRust/
@@ -86,7 +86,7 @@ bqAtlasRust/
   docs/
 ```
 
-Within each business module, use domain, application, endpoints and persistence folders. PostgreSQL and SQL Server stores live at the persistence boundary. Keep SQL execution and database row types out of domain services. A typed customer directory contract is shared; CRM tables and repositories are private to CRM.
+The plan proposed separate domain, application, endpoint and persistence folders. The source alpha instead groups these responsibilities in each business module's `src/lib.rs`; future splitting should preserve module ownership. PostgreSQL and SQL Server stores live at the persistence boundary. Keep SQL execution and database row types out of domain services. A typed customer directory contract is shared; CRM tables and repositories are private to CRM.
 
 The host registers modules explicitly, validates dependencies and rejects cycles or duplicate resource IDs. It selects configuration, database provider and authentication mode, then composes routers and services. Compile-time feature flags can omit an adapter; startup must reject a configured provider that the binary does not contain.
 
@@ -139,11 +139,11 @@ OIDC mode uses discovery, Authorization Code with PKCE, state and nonce validati
 
 Map provider roles and API scopes explicitly to the existing permission IDs. Enforce them in every endpoint and filter the manifest. Preserve the OIDC audit actor derived from issuer plus subject; email is not an account-linking key. New role assignments are deliberate application configuration, not an automatic expansion of existing provider roles.
 
-Optional JWT bearer access supports API clients. Validate the API audience and issuer and map configured scopes; an invalid Authorization header cannot fall back to a valid browser cookie. Only successfully authenticated API bearer requests bypass cookie CSRF. Account endpoints retain browser authentication. Do not substitute ID tokens for API access tokens.
+Planned extension, outside the current alpha: optional JWT bearer access would support API clients. Validate the API audience and issuer and map configured scopes; an invalid Authorization header cannot fall back to a valid browser cookie. Only successfully authenticated API bearer requests bypass cookie CSRF. Account endpoints retain browser authentication. Do not substitute ID tokens for API access tokens.
 
 ## OData approach
 
-Recommendation: implement the REST CRM first, followed by a documented read-only OData subset. The current CRM screens use REST, and the existing OData frontend provider already sends writes and record operations through REST. The owner's preference on this sequence remains open.
+The proposed sequence was REST CRM first, followed by a documented read-only OData subset. Implementation followed that sequence. The supported adapter is now documented in [ODATA.md](ODATA.md); full protocol conformance remains separate scope.
 
 The Rust libraries reviewed include an OData query parser and a DataFusion adapter; their published scope does not establish equivalent ASP.NET OData functionality for this ERP backend. The parser returns an expression tree and SQL renderings, while the DataFusion project's README describes experimental, limited protocol support. Treat these as feasibility inputs. Do not adopt their SQL output without field allowlists and parameter binding. [OData parser](https://docs.rs/odatav4-parser/latest/odatav4_parser/), [DataFusion adapter](https://github.com/kamu-data/datafusion-odata)
 
@@ -163,7 +163,7 @@ Advertise `oDataEndpoint` only after the endpoint's tests pass. If full OData co
 | 5. OData and resource generation | Qualified bounded query adapter; Rust resource generator using existing resource-spec concepts and shared frontend generation. | Actual Atlas REST/OData providers agree on approved fixtures; a generated resource compiles and passes CRUD, query and concurrency tests on both databases. |
 | 6. Starter and release qualification | Full-stack template, docs, deployment image and local package consumption. | Clean generated applications run for PostgreSQL/SQL Server with local/OIDC authentication; migration reapply/restart, demo workflows and module-authoring walkthrough pass. |
 
-Batch 4's broader authentication work is a release gate. Earlier batches provide a development slice with local login, rather than claiming complete account capabilities. Public package publishing follows a separate owner-authorized release step.
+These batches were proposed delivery targets. The alpha delivered local recovery and OIDC while deferring API bearer access and general field-driven generation. Use the current handoff to assess completion rather than treating every item in this historical table as shipped. Public package publishing remains a separate owner-authorized release step.
 
 ## Testing and operations
 
@@ -175,4 +175,4 @@ CI runs formatting, Clippy, workspace tests and explicit provider feature builds
 
 Add structured tracing, request correlation, health/readiness endpoints, configuration validation, query/body/time limits and graceful shutdown. Readiness checks the database and required migrations. Log business operation identifiers without passwords, recovery tokens or provider tokens. Supply deployment guidance for a same-origin reverse proxy and TLS.
 
-The first implementation action is Batch 0 followed by the customer slice. It resolves the largest integration risks while delivering a visible result in the existing UI. Existing data migration, broader OData conformance and public registry releases remain separately scoped work.
+The original implementation started with driver/contracts feasibility and the customer slice, then extended the connected CRM. Current next priorities are recorded in [HANDOFF.md](HANDOFF.md). Existing data migration, broader OData conformance and public registry releases remain separately scoped work.

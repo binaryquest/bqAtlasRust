@@ -15,6 +15,10 @@ fn starter_is_portable_and_directory_wiring_is_reviewable() {
     );
     for name in [
         "Cargo.toml",
+        "AGENTS.md",
+        "docs/ARCHITECTURE.md",
+        "docs/HANDOFF.md",
+        "docs/EXTENDING-RESOURCE.md",
         "samples/crm/web/vendor/manifest.json",
         "crates/bqatlas-auth/src/oidc.rs",
         "dev/oidc-roles.json",

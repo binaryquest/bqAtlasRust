@@ -40,17 +40,21 @@ For a first directory resource (code, name, contact email, active), see [module 
 
 ## Read and verify
 
+Contributors and AI agents should begin with [AGENTS.md](AGENTS.md), [current implementation status](docs/HANDOFF.md) and the [implemented architecture](docs/ARCHITECTURE.md). These describe the current source; the original plan is retained as historical context.
+
 - [Authentication and accounts](docs/AUTHENTICATION.md)
 - [Databases, migrations and deployment](docs/OPERATIONS.md)
 - [Bounded OData queries](docs/ODATA.md)
 - [Starter and module authoring](docs/MODULES.md)
+- [Extend a directory through database, API, UI and tests](docs/EXTENDING-RESOURCE.md)
 - [Testing and qualification](docs/TESTING.md)
-- [Original implementation plan and current status](docs/IMPLEMENTATION-PLAN.md)
+- [Original implementation proposal](docs/IMPLEMENTATION-PLAN.md)
 
 ```sh
 cargo fmt --all --check
-cargo clippy --workspace --all-targets -- -D warnings
-cargo test --workspace
+cargo clippy --locked --workspace --all-targets -- -D warnings
+cargo test --locked --workspace
+node dev/verify-frontend.mjs
 npm --prefix samples/crm/web run build
 ```
 

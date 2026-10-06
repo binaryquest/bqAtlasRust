@@ -38,6 +38,7 @@ fn main() {
         "Cargo.lock",
         "LICENSE",
         "README.md",
+        "AGENTS.md",
         "rust-toolchain.toml",
         ".gitignore",
         ".env.example",

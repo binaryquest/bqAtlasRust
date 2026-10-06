@@ -1,5 +1,7 @@
 # Starter and module authoring
 
+Read [ARCHITECTURE.md](ARCHITECTURE.md) for current ownership and composition points. For a complete field extension after scaffolding, follow [EXTENDING-RESOURCE.md](EXTENDING-RESOURCE.md).
+
 `cargo run -p bqatlas-cli -- new ../my-erp --name my-erp` generates an independent source workspace. The CLI embeds an explicit source allowlist and the pinned frontend package archives at build time. No existing path is overwritten. Rebuild the CLI after changing starter source. Registry package consumption can replace bundled framework source when publishing is authorized.
 
 ## First CRUD directory
@@ -14,9 +16,12 @@ Create `warehouse.resource.json`:
 cargo run -p bqatlas-cli -- directory --spec warehouse.resource.json --app ../my-erp --wire
 cd ../my-erp
 cargo fmt --all
-cargo test --workspace
+cargo check --workspace
+cargo test --locked --workspace
 cargo run -p bqatlas-server -- migrate
 ```
+
+The first generated build updates Cargo.lock to include the new crate; subsequent checks can use `--locked`. Generated applications include AGENTS.md and these guides, but retain the default ports. Adjust the database ports, API listen address, proxy and public origin before running two copies simultaneously.
 
 The initial scaffold has `code`, `name`, optional contact `email`, `active`, UUID ID, version and audit fields. It produces a typed module, both provider migrations, REST query/CRUD/lookup, OData reads and validation tests. With `--wire`, it adds the module dependency, registry, migrations, permissions, router, generic CRUD view and menu to the standard starter. Without it, compose the module yourself. Existing modules/destinations are refused; wiring validates known composition points before writing.
 
